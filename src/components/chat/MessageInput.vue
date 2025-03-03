@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="w-full">
-    <input type="text" class="border-2 border-red-500">
+  <div class="">
+    <input type="text" class="w-full border-2 border-blue-600 rounded-md">
   </div>
 </template>
