@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full flex flex-col justify-end">
+  <div class="flex flex-col justify-between">
     <h1>Messages</h1>
     <div class="flex flex-row gap-2">
       <span>02:48</span>

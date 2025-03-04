@@ -1,5 +1,5 @@
 <template>
-  <header class="flex max-w-full justify-between px-4 py-2 bg-white">
+  <header class="flex max-w-full h-16 justify-between px-4 py-2 bg-white">
     <h1 class="text-3xl franklin-gothic italic text-blue-600">Vox</h1>
     <div class="flex gap-4">
       <button>Action 1</button>
