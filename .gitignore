@@ -1,0 +1,38 @@
+# Logs
+client/logs
+client/*.log
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+client/lerna-debug.log*
+
+client/node_modules
+client/.DS_Store
+client/dist
+client/dist-ssr
+client/coverage
+client/*.local
+
+client/cypress/videos/
+client/cypress/screenshots/
+
+# Editor directories and files (these can stay at root level unless specific to client)
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+client/*.tsbuildinfo
+
+# Node app
+node/node_modules
+node/build
+node/npm-debug.log
+node/.nyc
+node/.env
+node/.DS_Store
