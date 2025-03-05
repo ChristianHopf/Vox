@@ -1,7 +1,7 @@
 import { io, Socket } from "socket.io-client";
 
 interface Config {
-  server: string;
+  address: string;
   port: number;
   nick: string;
 }
@@ -12,5 +12,5 @@ let socket: Socket | null = null;
 export function connectToServer(config: Config) {
   socket = io(url);
 
-  socket.emit('connect-to-server', config);
+  socket.emit("connect-to-server", config);
 }

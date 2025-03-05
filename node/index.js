@@ -35,7 +35,6 @@ io.on("connection", (socket) => {
       port: port || 6667,
       autoConnect: false,
     });
-
     // On connect, emit successful connect
     ircClient.connect(() => {
       socket.emit("status", "Connected to server");
