@@ -21,11 +21,11 @@ const closeModal = () => {
     <TheModal v-if="isOpen" :onCloseModal="closeModal" />
     <TheSidebar :onOpenModal="openModal" :onCloseModal="closeModal" />
     <div
-      class="flex flex-col justify-between w-full h-full px-4 border-s-2 border-t-2 border-b-2 bg-white border-blue-600 rounded-s-3xl">
+      class="flex flex-col justify-between w-full h-full px-4 pb-4 border-s-2 border-t-2 border-b-2 bg-white border-blue-600 rounded-s-3xl">
       <div class="grow overflow-y-auto">
         <Messages />
       </div>
-      <div class="sticky bottom-4">
+      <div class="">
         <MessageInput />
       </div>
     </div>
