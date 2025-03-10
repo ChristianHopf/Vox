@@ -22,7 +22,7 @@ const handleOpenModal = () => {
 </script>
 
 <template>
-  <div class="flex flex-col md:min-w-lg bg-blue-200">
+  <div class="flex flex-col lg:min-w-md bg-blue-200">
     <h1 class="text-xl text-center py-2">Servers</h1>
 
     <div class="flex flex-col items-center gap-4 px-4">
