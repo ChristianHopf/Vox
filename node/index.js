@@ -36,14 +36,20 @@ io.on("connection", (socket) => {
       autoConnect: false,
     });
 
-    socket.emit("status", "Connecting to ${address}:${port}...");
+    socket.emit("status", `Connecting to ${address}:${port}...`);
     ircClient.connect();
+
+    // Register event handlers
+    ircClient.on("registered", () => {
+      socket.emit("status", "Successfully registered on server");
+    });
+
+    ircClient.on("error", (err) => {
+      socket.emit("status", `Error: ${error.message}`);
+      console.error("Error: ", err);
+    })
   });
 
-  // On registered, emit successfully registered
-  ircClient.on("registered", () => {
-    socket.emit("status", "Successfully registered on server");
-  });
 
   socket.on("send-message", ({ channel, message }) => {
     if (ircClient) {
@@ -60,6 +66,6 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(3000, () => {
+server.listen(3000, () => {
   console.log("Listening on port 3000");
 });
