@@ -26,5 +26,9 @@ export function connectToServer(config: Config) {
 
   socket.on("status", handleReceiveStatus);
 
+  socket.on("message", (msg) => {
+    console.log(msg);
+  })
+
   socket.emit("connect-to-server", config);
 }

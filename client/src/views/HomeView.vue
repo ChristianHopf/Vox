@@ -4,6 +4,7 @@ import MessageInput from '@/components/chat/MessageInput.vue';
 import TheSidebar from '@/components/sidebar/TheSidebar.vue';
 import { ref } from 'vue';
 import ConnectModal from '@/components/modals/ConnectModal.vue';
+import Channels from '@/components/chat/Channels.vue';
 
 const isOpen = ref(false);
 
@@ -21,12 +22,15 @@ const closeModal = () => {
     <ConnectModal v-if="isOpen" :onCloseModal="closeModal" />
     <TheSidebar :onOpenModal="openModal" :onCloseModal="closeModal" />
     <div
-      class="flex flex-col justify-between w-full h-full px-4 pb-4 border-s-2 border-t-2 border-b-2 bg-white border-blue-600 rounded-s-3xl">
-      <div class="grow overflow-y-auto">
-        <Messages />
-      </div>
-      <div class="">
-        <MessageInput />
+      class="flex flex-row gap-4 w-full h-full px-4 pb-4 border-s-2 border-t-2 border-b-2 bg-white border-blue-600 rounded-s-3xl">
+      <Channels />
+      <div class="flex flex-col">
+        <div class="grow overflow-y-auto">
+          <Messages />
+        </div>
+          <div>
+            <MessageInput />
+          </div>
       </div>
     </div>
   </main>
