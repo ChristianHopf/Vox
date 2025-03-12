@@ -1,6 +1,14 @@
 <template>
   <div class="flex flex-row gap-4">
-    <input type="text" class="w-full border-2 border-blue-600 rounded-md" />
+    <select class="border-2 border-blue-600 rounded-md">
+      <option>
+        SAY
+      </option>
+      <option>
+        NICK
+      </option>
+    </select>
+    <input type="text" class="w-full px-2 border-2 border-blue-600 rounded-md" />
     <button type="button" class="text-white bg-blue-600 px-2 py-1 rounded-md">Send</button>
   </div>
 </template>

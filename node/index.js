@@ -30,36 +30,36 @@ io.on("connection", (socket) => {
   console.log("Client connected to:", socket.id);
   let ircClient = null;
 
-  socket.on("connect-to-server", ({ server: address, port, nick }) => {
+  socket.on("connect-to-server", ({ address, port, nick }) => {
     ircClient = new irc.Client(address, nick, {
       port: port || 6667,
       autoConnect: false,
     });
 
-    // On connect, emit successful connect
-    ircClient.connect(() => {
-      socket.emit("status", "Connected to server");
-    });
+    socket.emit("status", `Connecting to ${address}:${port}...`);
+    ircClient.connect();
 
-    // On registered, emit successfully registered
+    // Register event handlers
     ircClient.on("registered", () => {
       socket.emit("status", "Successfully registered on server");
+      ircClient.list();
     });
 
-    // On receiving a message, emit it to the appropriate channel
-    ircClient.on("message", (from, to, message) => {
-      socket.emit("message", {
-        from,
-        message,
-        channel: to,
-      });
-    });
+    ircClient.on("message", (msg) => {
+      console.log("Received message: ", msg.rawCommand);
+      socket.emit("message", msg);
+    })
 
-    // On error err, emit err
+    ircClient.on("raw", (msg) => {
+      console.log(msg);
+    })
+
     ircClient.on("error", (err) => {
-      socket.emit("error", err);
-    });
+      socket.emit("status", `Error: ${error.message}`);
+      console.error("Error: ", err);
+    })
   });
+
 
   socket.on("send-message", ({ channel, message }) => {
     if (ircClient) {
