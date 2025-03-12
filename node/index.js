@@ -42,7 +42,17 @@ io.on("connection", (socket) => {
     // Register event handlers
     ircClient.on("registered", () => {
       socket.emit("status", "Successfully registered on server");
+      ircClient.list();
     });
+
+    ircClient.on("message", (msg) => {
+      console.log("Received message: ", msg.rawCommand);
+      socket.emit("message", msg);
+    })
+
+    ircClient.on("raw", (msg) => {
+      console.log(msg);
+    })
 
     ircClient.on("error", (err) => {
       socket.emit("status", `Error: ${error.message}`);
