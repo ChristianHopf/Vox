@@ -29,6 +29,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Client connected to:", socket.id);
   let ircClient = null;
+  let channels = []
+  let joinedChannels = []
 
   socket.on("connect-to-server", ({ address, port, nick }) => {
     ircClient = new irc.Client(address, nick, {
@@ -42,8 +44,23 @@ io.on("connection", (socket) => {
     // Register event handlers
     ircClient.on("registered", () => {
       socket.emit("status", "Successfully registered on server");
+      ircClient.join("#testchannel");
+      // ircClient.send('MODE', '#testchannel', '+P');
       ircClient.list();
     });
+
+    ircClient.on("channellist_start", () => {
+      channels = []
+    })
+
+    ircClient.on("channellist_item", (channelInfo) => {
+      console.log(channelInfo);
+      channels.push(channelInfo)
+    })
+
+    ircClient.on("channellist", (channels) => {
+      console.log(channels);
+    })
 
     ircClient.on("message", (msg) => {
       console.log("Received message: ", msg.rawCommand);
@@ -51,11 +68,11 @@ io.on("connection", (socket) => {
     })
 
     ircClient.on("raw", (msg) => {
-      console.log(msg);
+      // console.log(msg);
     })
 
     ircClient.on("error", (err) => {
-      socket.emit("status", `Error: ${error.message}`);
+      socket.emit("status", `Error: ${err.message}`);
       console.error("Error: ", err);
     })
   });
