@@ -29,6 +29,51 @@ client/cypress/screenshots/
 
 client/*.tsbuildinfo
 
+# Angular client
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+angular-client/dist
+angular-client/tmp
+angular-client/out-tsc
+angular-client/bazel-out
+
+# Node
+angular-client/node_modules
+angular-client/npm-debug.log
+angular-client/yarn-error.log
+
+# IDEs and editors
+angular-client/.idea/
+angular-client/.project
+angular-client/.classpath
+angular-client/.c9/
+angular-client/*.launch
+angular-client/.settings/
+/*.sublime-workspace
+
+# Visual Studio Code
+angular-client/.vscode/*
+angular-client/!.vscode/settings.json
+angular-client/!.vscode/tasks.json
+angular-client/!.vscode/launch.json
+angular-client/!.vscode/extensions.json
+angular-client/.history/*
+
+# Miscellaneous
+angular-client/.angular/cache
+angular-client/.sass-cache/
+angular-client/connect.lock
+angular-client/coverage
+angular-client/libpeerconnection.log
+angular-client/testem.log
+angular-client/typings
+
+# System files
+angular-client/.DS_Store
+angular-client/Thumbs.db
+
+
 # Node app
 node/node_modules
 node/build
