@@ -1,5 +1,5 @@
 <div
-  @click="handleCloseModal"
+  (click)="handleCloseModal()"
   class="absolute flex justify-center items-center min-h-screen w-full bg-black opacity-50"
 ></div>
 <div
@@ -18,7 +18,7 @@
     class="bg-white px-2 py-1 border-2 border-blue-600 rounded-md"
   />
   <button
-    @click="handleAddServer"
+    (click)="handleAddServer()"
     type="button"
     class="text-white bg-blue-600 hover:bg-blue-700 hover:ring-2 hover:ring-blue-300 hover:cursor-pointer transition-all duration:200 px-2 py-1 rounded-md"
   >
