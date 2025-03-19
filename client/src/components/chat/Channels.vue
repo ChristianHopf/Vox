@@ -1,5 +1,4 @@
 <script setup>
-import { stringify } from 'uuid';
 
 const props = defineProps({
 });
