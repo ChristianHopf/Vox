@@ -20,7 +20,7 @@ export class SocketService {
     console.log('Received status: ', status);
   }
 
-  private connectToServer(config: Config) {
+  connectToServer(config: Config) {
     this.socket = io(this.url);
 
     this.socket.on('connect', () => {
