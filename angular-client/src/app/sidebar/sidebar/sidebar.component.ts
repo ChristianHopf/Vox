@@ -1,10 +1,11 @@
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
+import { ServerComponent } from '../server/server.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [],
+  imports: [ServerComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
