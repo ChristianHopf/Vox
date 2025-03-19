@@ -1,5 +1,8 @@
 <script setup>
+import { stringify } from 'uuid';
 
+const props = defineProps({
+});
 </script>
 
 <template>
