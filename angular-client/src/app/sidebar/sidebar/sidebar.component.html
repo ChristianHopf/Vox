@@ -3,7 +3,10 @@
 
   <div class="flex flex-col items-center gap-4 px-4">
     <ul class="flex justify-center px-4 py-2 bg-white w-full rounded-lg">
-      <app-server />
+      <p *ngIf="(state$ | async)?.servers?.length == 0">No servers.</p>
+      <li *ngFor="let server of (state$ | async)?.servers">
+        <app-server [name]="server.name"/>
+      </li>
     </ul>
     <button
       (click)="handleOpenModal()"

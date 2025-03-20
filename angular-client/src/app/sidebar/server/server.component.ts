@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Input } from "@angular/core";
 
 @Component({
   selector: 'app-server',
@@ -8,5 +9,6 @@ import { Component } from '@angular/core';
   styleUrl: './server.component.css'
 })
 export class ServerComponent {
-
+  // Accept name
+ @Input({required: true}) name: string = '';
 }
