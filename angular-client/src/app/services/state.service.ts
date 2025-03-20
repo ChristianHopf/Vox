@@ -13,6 +13,8 @@ export class StateService {
     servers: [],
   });
 
+  state$ = this.stateSubject.asObservable();
+
   registerServer(name: string, nick: string, channels: string[]): void {
     const server: Server = { name, nick, channels, connected: true };
     localStorage.setItem('servers', JSON.stringify([server]));

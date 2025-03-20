@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
+import { StateService } from './state.service';
 
 interface Config {
   address: string;
@@ -14,7 +15,7 @@ export class SocketService {
   private readonly url = 'http://localhost:3000';
   private socket: Socket | null = null;
 
-  constructor() {}
+  constructor(private stateService: StateService) {}
 
   private handleReceiveStatus(status: string) {
     console.log('Received status: ', status);
@@ -40,6 +41,7 @@ export class SocketService {
 
     this.socket.on('channels', (channels) => {
       console.log(channels);
+      this.stateService.registerServer(config.address, config.nick, channels);
     });
 
     this.socket.emit('connect-to-server', config);
