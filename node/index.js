@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
     // Register event handlers
     ircClient.on("registered", () => {
       socket.emit("status", "Successfully registered on server");
-      ircClient.join("#testchannel");
+      // ircClient.join("#testchannel");
       // ircClient.send('MODE', '#testchannel', '+P');
       ircClient.list();
     });
@@ -54,22 +54,26 @@ io.on("connection", (socket) => {
     });
 
     ircClient.on("channellist_item", (channelInfo) => {
-      console.log(channelInfo);
       channels.push(channelInfo);
     });
 
     ircClient.on("channellist", (channels) => {
-      console.log(channels);
+      // console.log(channels);
+      if (channels.length > 20) {
+        socket.emit("channels", channels.slice(0, 21));
+      } else {
+        socket.emit("channels", channels);
+      }
     });
 
-    ircClient.on("message", (msg) => {
-      console.log("Received message: ", msg.rawCommand);
-      socket.emit("message", msg);
-    });
+    // ircClient.on("message", (msg) => {
+    //   console.log("Received message: ", msg.rawCommand);
+    //   socket.emit("message", msg);
+    // });
 
-    ircClient.on("raw", (msg) => {
-      // console.log(msg);
-    });
+    // ircClient.on("raw", (msg) => {
+    //   // console.log(msg);
+    // });
 
     ircClient.on("error", (err) => {
       socket.emit("status", `Error: ${err.message}`);

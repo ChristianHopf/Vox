@@ -21,7 +21,7 @@ export class SocketService {
   }
 
   connectToServer(config: Config) {
-    console.log("Opening socket");
+    console.log('Opening socket');
     this.socket = io(this.url);
 
     this.socket.on('connect', () => {
@@ -36,6 +36,10 @@ export class SocketService {
 
     this.socket.on('message', (msg) => {
       console.log(msg);
+    });
+
+    this.socket.on('channels', (channels) => {
+      console.log(channels);
     });
 
     this.socket.emit('connect-to-server', config);
