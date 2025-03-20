@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:4200"],
     methods: ["GET", "POST"],
   },
 });
@@ -29,6 +29,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Client connected to:", socket.id);
   let ircClient = null;
+  let channels = [];
+  let joinedChannels = [];
 
   socket.on("connect-to-server", ({ address, port, nick }) => {
     ircClient = new irc.Client(address, nick, {
@@ -42,24 +44,42 @@ io.on("connection", (socket) => {
     // Register event handlers
     ircClient.on("registered", () => {
       socket.emit("status", "Successfully registered on server");
+      // ircClient.join("#testchannel");
+      // ircClient.send('MODE', '#testchannel', '+P');
       ircClient.list();
     });
 
-    ircClient.on("message", (msg) => {
-      console.log("Received message: ", msg.rawCommand);
-      socket.emit("message", msg);
-    })
+    ircClient.on("channellist_start", () => {
+      channels = [];
+    });
 
-    ircClient.on("raw", (msg) => {
-      console.log(msg);
-    })
+    ircClient.on("channellist_item", (channelInfo) => {
+      channels.push(channelInfo);
+    });
+
+    ircClient.on("channellist", (channels) => {
+      // console.log(channels);
+      if (channels.length > 20) {
+        socket.emit("channels", channels.slice(0, 21));
+      } else {
+        socket.emit("channels", channels);
+      }
+    });
+
+    // ircClient.on("message", (msg) => {
+    //   console.log("Received message: ", msg.rawCommand);
+    //   socket.emit("message", msg);
+    // });
+
+    // ircClient.on("raw", (msg) => {
+    //   // console.log(msg);
+    // });
 
     ircClient.on("error", (err) => {
-      socket.emit("status", `Error: ${error.message}`);
+      socket.emit("status", `Error: ${err.message}`);
       console.error("Error: ", err);
-    })
+    });
   });
-
 
   socket.on("send-message", ({ channel, message }) => {
     if (ircClient) {
