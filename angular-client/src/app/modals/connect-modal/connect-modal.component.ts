@@ -19,6 +19,7 @@ export class ConnectModalComponent {
 
   handleCloseModal(): void {
     this.onCloseModal();
+    console.log('close modal');
   }
 
   handleAddServer(): void {
