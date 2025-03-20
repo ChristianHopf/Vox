@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:4200"],
     methods: ["GET", "POST"],
   },
 });
@@ -29,8 +29,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Client connected to:", socket.id);
   let ircClient = null;
-  let channels = []
-  let joinedChannels = []
+  let channels = [];
+  let joinedChannels = [];
 
   socket.on("connect-to-server", ({ address, port, nick }) => {
     ircClient = new irc.Client(address, nick, {
@@ -50,33 +50,32 @@ io.on("connection", (socket) => {
     });
 
     ircClient.on("channellist_start", () => {
-      channels = []
-    })
+      channels = [];
+    });
 
     ircClient.on("channellist_item", (channelInfo) => {
       console.log(channelInfo);
-      channels.push(channelInfo)
-    })
+      channels.push(channelInfo);
+    });
 
     ircClient.on("channellist", (channels) => {
       console.log(channels);
-    })
+    });
 
     ircClient.on("message", (msg) => {
       console.log("Received message: ", msg.rawCommand);
       socket.emit("message", msg);
-    })
+    });
 
     ircClient.on("raw", (msg) => {
       // console.log(msg);
-    })
+    });
 
     ircClient.on("error", (err) => {
       socket.emit("status", `Error: ${err.message}`);
       console.error("Error: ", err);
-    })
+    });
   });
-
 
   socket.on("send-message", ({ channel, message }) => {
     if (ircClient) {

@@ -21,6 +21,7 @@ export class SocketService {
   }
 
   connectToServer(config: Config) {
+    console.log("Opening socket");
     this.socket = io(this.url);
 
     this.socket.on('connect', () => {
