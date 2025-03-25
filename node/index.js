@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
 
     // Register event handlers
     ircClient.on("registered", () => {
-      socket.emit("status", "Successfully registered on server");
+      socket.emit("registration", "Successfully registered on server");
       // ircClient.join("#testchannel");
       // ircClient.send('MODE', '#testchannel', '+P');
       ircClient.list();

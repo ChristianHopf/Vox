@@ -19,6 +19,7 @@ export class SocketService {
 
   private handleReceiveStatus(status: string) {
     console.log('Received status: ', status);
+    // On register success, close modal
   }
 
   connectToServer(config: Config) {
@@ -31,6 +32,11 @@ export class SocketService {
 
     this.socket.on('disconnect', () => {
       console.log(this.socket?.id); // undefined
+    });
+
+    this.socket.on('registration', () => {
+      // Trigger modal close somehow
+      console.log("Successfully registered on server");
     });
 
     this.socket.on('status', this.handleReceiveStatus);

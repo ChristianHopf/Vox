@@ -1,5 +1,5 @@
 <main class="flex w-full h-[calc(100vh-4rem)] bg-blue-200">
-  <app-connect-modal *ngIf="isOpen" [onCloseModal]="closeModal" />
+  <app-connect-modal *ngIf="showConnectModal" [onCloseModal]="closeModal" />
   <app-sidebar [onOpenModal]="openModal" [onCloseModal]="closeModal" />
   <div
     class="flex flex-row gap-4 w-full h-full px-4 pb-4 border-s-2 border-t-2 border-b-2 bg-white border-blue-600 rounded-s-3xl"

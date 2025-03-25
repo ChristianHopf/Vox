@@ -6,6 +6,7 @@ import { MessagesComponent } from '../chat/messages/messages.component';
 import { MessageinputComponent } from '../chat/messageinput/messageinput.component';
 
 import { CommonModule } from '@angular/common';
+import { StateService } from '../services/state.service';
 
 @Component({
   selector: 'app-home',
@@ -21,9 +22,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  isOpen: boolean = false;
+  showConnectModal: boolean;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private stateService: StateService) {
+    this.showConnectModal = this.stateService.isConnectModalVisible;
+  }
 
   openModal = () => {
     this.isOpen = true;

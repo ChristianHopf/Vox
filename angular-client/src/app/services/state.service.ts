@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Server, AppState } from '../types/server';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateService {
-  constructor() {}
+
+  isConnectModalVisible: boolean;
+  connectModalVisible: Subject<boolean> = new Subject();
+
+  constructor() {
+    this.isConnectModalVisible = false;
+  }
 
   private stateSubject = new BehaviorSubject<AppState>({
     connectedServer: null,
@@ -26,5 +32,10 @@ export class StateService {
       connectedServer: server,
       servers: [server],
     });
+  }
+
+  toggleConnectModalVisible(): void {
+    this.isConnectModalVisible = !this.isConnectModalVisible;
+    this.connectModalVisible.next(this.isConnectModalVisible);
   }
 }
